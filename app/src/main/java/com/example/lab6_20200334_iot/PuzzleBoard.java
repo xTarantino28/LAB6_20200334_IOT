@@ -9,6 +9,12 @@ import java.util.ArrayList;
 public class PuzzleBoard {
 
     public static int NUM_TILES = MainActivity.LEVEL;
+
+    public int getBoardSize() {
+        return boardSize;
+    }
+
+    int boardSize = MainActivity.LEVEL * MainActivity.LEVEL;
     private static final int[][] NEIGHBOUR_COORDS = {
             { -1, 0 },
             { 1, 0 },

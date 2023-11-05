@@ -16,6 +16,7 @@ import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -69,8 +70,14 @@ public class PuzzleActivity extends AppCompatActivity {
                 }
             }
         });
-
-
+        ImageButton botonSolve = findViewById(R.id.solve_button);
+        botonSolve.setEnabled(false);
+        /* botonSolve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(PuzzleActivity.this, "Solve automatico deshabilitado mientras funcione desordenamiento Fisher-Yates", Toast.LENGTH_SHORT).show();
+            }
+        });*/
 
 
     }

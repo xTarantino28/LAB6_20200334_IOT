@@ -89,7 +89,7 @@ public class PuzzleBoardView extends View {
         }*/  // REORDENA POR PARTES (SOLO CIERTO LUGAR DE LA IMAGEN)
 
         //ESTE CODIGO REALIZA ITERACIOONES DE REORDENAMIENTO ANTES DE MOSTRAR LA IMAGEN TOTALMENTE DESORDENADA.
-        if (animation == null && puzzleBoard != null) {
+       /* if (animation == null && puzzleBoard != null) {
             Score = 0;
             Log.d("TAG", "Shuffling completely...");
 
@@ -114,6 +114,59 @@ public class PuzzleBoardView extends View {
             }
         } else {
             Toast.makeText(getContext(), "Take a picture and then try shuffle", Toast.LENGTH_SHORT).show();
+        }*/
+
+
+        //CODIGO DE DESORDENAMIENTO VARIANTE
+        /*if (animation == null && puzzleBoard != null) {
+            Score = 0;
+            Log.d("TAG", "Shuffling completely...");
+
+            // Obtén una lista de posibles movimientos aleatorios
+            ArrayList<PuzzleBoard> randomMoves = new ArrayList<>();
+
+            // Realiza movimientos aleatorios
+            for (int i = puzzleBoard.getBoardSize() * puzzleBoard.getBoardSize() * puzzleBoard.getBoardSize(); i > 0; i--) {
+                ArrayList<PuzzleBoard> neighbours = puzzleBoard.neighbours();
+                int randIndex = random.nextInt(neighbours.size());
+
+                // Agrega el vecino en el índice aleatorio a la lista de movimientos aleatorios
+                randomMoves.add(neighbours.get(randIndex));
+
+                // Actualiza puzzleBoard para que sea igual al vecino seleccionado
+                puzzleBoard = neighbours.get(randIndex);
+            }
+
+            // Realiza un reordenamiento completo aleatorio
+            for (PuzzleBoard board : randomMoves) {
+                puzzleBoard = board;
+                invalidate();
+            }
+        } else {
+            Toast.makeText(getContext(), "Take a picture and then try shuffle", Toast.LENGTH_SHORT).show();
+        }*/
+
+        //UTILIZANDO EL ALGORITMO DE FISHER-YATES
+        if (animation == null && puzzleBoard != null) {
+            Score = 0;
+            Log.d("TAG", "Shuffling completely...");
+
+            int boardSize = puzzleBoard.getBoardSize();
+
+            // Realiza movimientos aleatorios en el mismo tablero
+            for (int i = boardSize - 1; i > 0; i--) {
+                int j = random.nextInt(i + 1);
+                int tileIndexA = i;
+                int tileIndexB = j;
+
+                // Intercambia las dos piezas aleatoriamente
+                puzzleBoard.swapTiles(tileIndexA, tileIndexB);
+
+                // Actualiza la vista
+                invalidate();
+            }
+        } else {
+            Toast.makeText(getContext(), "Take a picture and then try shuffle", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -131,7 +184,7 @@ public class PuzzleBoardView extends View {
                             PuzzleActivity.setBestScore(Score);
                             String msg = "Felicidades, Ganaste! \n Movimientos : "+Score;
                             if (Score == -1) {
-                                msg = "Primero comienza luego resuelve";
+                                msg = "Primero Comienza el JUEGO, luego resuelve. Vuelve a intentar";
                             }
                             Toast toast = Toast.makeText(activity, msg, Toast.LENGTH_LONG);
                             toast.show();
