@@ -70,6 +70,8 @@ public class ImagenAdapter extends RecyclerView.Adapter<ImagenAdapter.ImagenView
             public void onClick(View v) {
                 // Elimina la imagen cuando se hace clic en el botón de eliminación
                 removeImage(holder.getAdapterPosition());
+                MemoryClassicActivity memoryClassicActivity = (MemoryClassicActivity) context;
+                memoryClassicActivity.binding.textView4.setText("" + getItemCount());
             }
         });
     }

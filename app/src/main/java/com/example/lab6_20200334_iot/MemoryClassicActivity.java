@@ -31,11 +31,12 @@ public class MemoryClassicActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL, false));
         recyclerView.setAdapter(adapter);
 
-
+        binding.textView4.setText("0");
         binding.buttonAddImages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openGallery();
+
             }
         });
 
@@ -58,6 +59,7 @@ public class MemoryClassicActivity extends AppCompatActivity {
 
             // Aquí puedes obtener la imagen y agregarla a tu RecyclerView
             adapter.addImage(imageUri);
+            binding.textView4.setText("" + adapter.getItemCount());
         }
     }
 
